@@ -1,1 +1,501 @@
 /* You can add global styles to this file, and also import other style files */
+/* ===================================
+   Gestion RV Médicaux - CSS Personnalisé
+   =================================== */
+
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+    --light-color: #f8f9fa;
+    --dark-color: #212529;
+}
+
+/* ===== Global Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+/* ===== Login Card ===== */
+.login-card {
+    max-width: 450px;
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+.login-card .card-body {
+    background: #fff;
+}
+
+/* ===== Navbar Styles ===== */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: 0.5px;
+}
+
+.navbar .nav-link {
+    margin-right: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.navbar .nav-link.active {
+    border-bottom: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+/* ===== Card Styles ===== */
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 0.5rem;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    font-weight: 600;
+    padding: 1rem;
+}
+
+/* ===== Stats Cards ===== */
+.card-body .d-flex {
+    margin-bottom: 0.5rem;
+}
+
+.card-body h6 {
+    font-weight: 600;
+    color: #6c757d;
+    font-size: 0.875rem;
+}
+
+.card-body h3 {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* ===== Table Styles ===== */
+.table {
+    font-size: 0.95rem;
+}
+
+.table thead {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table thead th {
+    font-weight: 600;
+    color: #495057;
+    border: none;
+    padding: 1rem 0.5rem;
+}
+
+.table tbody td {
+    padding: 1rem 0.5rem;
+    vertical-align: middle;
+    border-color: #e9ecef;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* ===== Avatar Styles ===== */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: white;
+}
+
+/* ===== Badge Styles ===== */
+.badge {
+    font-weight: 600;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+}
+
+.badge-success {
+    background-color: var(--success-color);
+}
+
+.badge-danger {
+    background-color: var(--danger-color);
+}
+
+.badge-warning {
+    background-color: var(--warning-color);
+    color: #000;
+}
+
+.badge-info {
+    background-color: var(--info-color);
+    color: #000;
+}
+
+/* ===== Form Styles ===== */
+.form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-control,
+.form-select {
+    border: 1px solid #ddd;
+    border-radius: 0.35rem;
+    padding: 0.6rem 0.75rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+/* ===== Button Styles ===== */
+.btn {
+    font-weight: 600;
+    border-radius: 0.35rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(13, 110, 253, 0.3);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-sm {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.6rem;
+}
+
+/* ===== Appointment Item ===== */
+.appointment-item {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+.appointment-item h6 {
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+/* ===== Alert Styles ===== */
+.alert {
+    border-radius: 0.35rem;
+    padding: 1rem;
+    font-size: 0.95rem;
+}
+
+.alert-info {
+    background-color: #e7f3ff;
+    border-color: #b3d9ff;
+    color: #004085;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeaa7;
+    color: #856404;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* ===== Icon Styles ===== */
+i {
+    margin-right: 0.3rem;
+}
+
+/* ===== Dropdown Styles ===== */
+.dropdown-menu {
+    border-radius: 0.35rem;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    padding: 0.6rem 1rem;
+    font-size: 0.95rem;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: var(--primary-color);
+}
+
+/* ===== Min Height ===== */
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+/* ===== Responsive Styles ===== */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+
+    .table {
+        font-size: 0.85rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+
+    .container-fluid {
+        padding: 1rem;
+    }
+}
+
+/* ===== Print Styles ===== */
+@media print {
+    .navbar,
+    .btn,
+    .dropdown-toggle {
+        display: none !important;
+    }
+
+    .card {
+        page-break-inside: avoid;
+    }
+}
+
+/* ===== Custom Scrollbar ===== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* ===== Animation ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* ===== Utilities ===== */
+.text-muted {
+    color: #6c757d !important;
+}
+
+.bg-opacity-25 {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.bg-opacity-10 {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Shadow Utilities ===== */
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.shadow {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+/* ===== Status Colors ===== */
+.status-pending {
+    color: #ffc107;
+    font-weight: 600;
+}
+
+.status-approved {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.status-rejected {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+.status-completed {
+    color: #0dcaf0;
+    font-weight: 600;
+}
+
+/* ===== Dossier Médical Styles ===== */
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.nav-tabs .nav-link {
+    color: #495057;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    border-bottom-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.nav-tabs .nav-link.active {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.tab-pane {
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* ===== Modal Styles ===== */
+.modal-content {
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.modal-header {
+    border-bottom: 1px solid #dee2e6;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6;
+    padding: 1rem;
+}
+
+/* ===== Medicament Input Styles ===== */
+#medicamentsList .card-body {
+    padding: 0.75rem;
+}
+
+#medicamentsList .form-control-sm {
+    font-size: 0.875rem;
+}
+
+/* ===== Consultation Card ===== */
+.card.border-0 {
+    border-left: 4px solid var(--primary-color) !important;
+}
+
+/* ===== Table in Ordonnances ===== */
+.table-responsive {
+    border-radius: 0.25rem;
+}
+
+.table-sm thead {
+    background-color: #f8f9fa;
+}
+
+.table-sm td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* ===== Badge Colors in Medical Records ===== */
+.badge-medical-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.badge-medical-warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.badge-medical-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
