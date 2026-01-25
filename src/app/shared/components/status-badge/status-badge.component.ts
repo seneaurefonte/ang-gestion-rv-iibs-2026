@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,7 +8,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './status-badge.component.html',
   styleUrl: './status-badge.component.css'
 })
-export class StatusBadgeComponent {
+export class StatusBadgeComponent implements OnInit {
+  @Input() status?: string;
   @Input() text: string = 'Statut';
   @Input() icon: string = 'bi-info-circle';
   @Input() bgClass: string = 'bg-secondary';
@@ -52,6 +53,12 @@ export class StatusBadgeComponent {
       textClass: 'text-white'
     }
   };
+
+  ngOnInit() {
+    if (this.status) {
+      this.setStatus(this.status);
+    }
+  }
 
   setStatus(status: string) {
     const preset = this.statusPresets[status];
