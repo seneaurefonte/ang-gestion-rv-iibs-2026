@@ -1,0 +1,13 @@
+/* Styles simples pour la pagination Bootstrap */
+.page-link {
+  cursor: pointer;
+}
+
+.page-item.active .page-link {
+  font-weight: 600;
+}
+
+.page-item.disabled .page-link {
+  cursor: not-allowed;
+}
+

@@ -1,0 +1,9 @@
+<div class="alert" [class]="'alert-' + type">
+  <div class="d-flex align-items-center">
+    <span class="me-2 fs-5">{{ getIcon() }}</span>
+    <span>{{ message }}</span>
+  </div>
+  @if (dismissible) {
+    <button type="button" class="btn-close" (click)="close()" aria-label="Close"></button>
+  }
+</div>
