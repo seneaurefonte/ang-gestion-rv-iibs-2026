@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RvComponent } from './rv.component';
+import { HearderPublicComponent } from './hearder-public.component';
 
-describe('RvComponent', () => {
-  let component: RvComponent;
-  let fixture: ComponentFixture<RvComponent>;
+describe('HearderPublicComponent', () => {
+  let component: HearderPublicComponent;
+  let fixture: ComponentFixture<HearderPublicComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RvComponent]
+      imports: [HearderPublicComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(RvComponent);
+    fixture = TestBed.createComponent(HearderPublicComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

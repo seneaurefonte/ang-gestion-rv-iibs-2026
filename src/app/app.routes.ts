@@ -1,16 +1,57 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { DemandeRvComponent } from './features/demande-rv/demande-rv.component';
-import { FormDemandeComponent } from './features/demande-rv/form-demande/form-demande.component';
+
+import { ListDemandeComponent } from './features/private/list-demande/list-demande.component';
+import { LoginComponent } from './features/public/login/login.component';
+import { PrivateComponent } from './features/private/private.component';
+import { PublicComponent } from './features/public/public.component';
+import { CreatePatientComponent } from './features/public/create-patient/create-patient.component';
+
 
 export const routes: Routes = [
-     {
-   path:"dash",
-   component: DashboardComponent
-   },
-  {
-   path:"form-demande",
-   component: FormDemandeComponent
-  },
+     
+      {
+        path:'gest-rv',
+          component:PrivateComponent,
+          children:[
+            {
+              path:'list-drv',
+              component:ListDemandeComponent
+            },
+            {
+            path:'',
+             redirectTo:'list-drv',
+             pathMatch:'full'
+          }
+
+        ]
+      }
+      ,
+      {
+        path:'public',
+        component:PublicComponent,
+        children:[  
+          {
+            path:"create-patient",
+            component:CreatePatientComponent
+          },  
+          {
+            path:"login",
+            component:LoginComponent
+          },
+          {
+            path:'',
+             redirectTo:'/login',
+             pathMatch:'full'
+          }
+
+        ]
+      },
+      
+       {
+        path:'',
+        redirectTo:"/public/login",
+        pathMatch:'full'
+      },
+  
  
 ];

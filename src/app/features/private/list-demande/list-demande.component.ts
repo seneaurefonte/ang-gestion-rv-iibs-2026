@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-list-demande',
@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
   templateUrl: './list-demande.component.html',
   styleUrl: './list-demande.component.css'
 })
-export class ListDemandeComponent {
+export class ListDemandeComponent  implements OnInit{
+  ngOnInit(): void {
+
+  }
+     
 
 }
