@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "rootDir": "./src",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -16,7 +17,6 @@
     "declaration": false,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "ignoreDeprecations": "6.0",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
@@ -24,7 +24,11 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@shared": ["src/app/shared"],
+      "@shared/*": ["src/app/shared/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

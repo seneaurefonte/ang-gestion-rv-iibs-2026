@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
-import { StatusBadgeComponent } from '../../../shared/components/status-badge/status-badge.component';
+import { PaginationComponent, StatusBadgeComponent } from '@shared';
 
 @Component({
   selector: 'app-list-demande',

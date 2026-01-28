@@ -1,8 +1,19 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+/*
+
+ <div [app-alert]="type, message, dismissible, autoClose"></div> 
+ <app-alert
+    [type]="'success'"
+    [message]="'Operation completed successfully!'"
+    [dismissible]="true"
+    [autoClose]="5000"
+    (closed)="onAlertClosed()"
+ ></app-alert>
+*/
 @Component({
-  selector: 'app-alert',
+  selector: '[app-alert]',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './alert.component.html',
