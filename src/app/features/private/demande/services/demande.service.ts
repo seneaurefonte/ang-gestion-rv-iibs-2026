@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { DemandRV, DemandRVResponse, DemandRVFilter } from '../models/demande.model';
-import { MOCK_DEMANDES } from '../../../../mocks/demande.mock';
+import { IDemandeService } from './demande.interface';
+import { MOCK_DEMANDES } from '@mock/demande.mock';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DemandeService {
+export class DemandeService implements IDemandeService {
   private apiUrl = '/api/demandes'; // À remplacer par l'URL réelle de votre API
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   /**
    * Récupère la liste des demandes de RV avec filtrage et pagination
@@ -84,12 +84,10 @@ export class DemandeService {
    */
   private getMockDemandes(filters: DemandRVFilter): DemandRVResponse {
     let demandes = [...MOCK_DEMANDES];
-
     // Filtrer par statut
     if (filters.statut) {
       demandes = demandes.filter(d => d.statut === filters.statut);
     }
-
     // Filtrer par spécialité
     if (filters.specialite) {
       demandes = demandes.filter(d =>
@@ -119,15 +117,5 @@ export class DemandeService {
     return 'DEM-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
   }
 
-  /**
-   * Construit les paramètres de requête
-   */
-  private buildQueryParams(filters: DemandRVFilter): any {
-    const params: any = {};
-    if (filters.statut) params.statut = filters.statut;
-    if (filters.specialite) params.specialite = filters.specialite;
-    if (filters.page) params.page = filters.page;
-    if (filters.limit) params.limit = filters.limit;
-    return params;
-  }
+
 }

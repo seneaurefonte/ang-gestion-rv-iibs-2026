@@ -27,7 +27,11 @@
     ],
     "paths": {
       "@shared": ["src/app/shared"],
-      "@shared/*": ["src/app/shared/*"]
+      "@shared/*": ["src/app/shared/*"],
+      "@service": ["src/app/features/private/demande/services"],
+      "@service/*": ["src/app/features/private/demande/services/*"],
+      "@mock": ["src/app/mocks"],
+      "@mock/*": ["src/app/mocks/*"]
     }
   },
   "angularCompilerOptions": {

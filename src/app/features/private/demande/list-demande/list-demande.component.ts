@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PaginationComponent, StatusBadgeComponent } from '@shared';
-import { DemandeService } from '../services/demande.service';
+import { IDemandeService, DEMANDE_SERVICE_TOKEN } from '../services';
 import { DemandRV, DemandRVFilter, StatutDemande } from '../models/demande.model';
 
 @Component({
@@ -29,7 +29,7 @@ export class ListDemandeComponent implements OnInit {
   // Const pour les statuts
   StatutDemande = StatutDemande;
 
-  constructor(private demandeService: DemandeService) {}
+  constructor(@Inject(DEMANDE_SERVICE_TOKEN) private demandeService: IDemandeService) {}
 
   ngOnInit(): void {
     this.loadDemandes();
