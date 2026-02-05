@@ -2,20 +2,21 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { PaginationComponent, StatusBadgeComponent } from '@shared';
+import { PaginationComponent, StatusBadgeComponent, LoadingComponent } from '@shared';
 import { IDemandeService, DEMANDE_SERVICE_TOKEN } from '../services';
 import { DemandRV, DemandRVFilter, StatutDemande } from '../models/demande.model';
 
 @Component({
   selector: 'app-list-demande',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, PaginationComponent, StatusBadgeComponent],
+  imports: [CommonModule, FormsModule, RouterModule, PaginationComponent, StatusBadgeComponent, LoadingComponent],
   templateUrl: './list-demande.component.html',
   styleUrl: './list-demande.component.css'
 })
 export class ListDemandeComponent implements OnInit {
   demandes: DemandRV[] = [];
   filteredDemandes: DemandRV[] = [];
+  isLoading: boolean = false;
   
   currentPage: number = 1;
   totalPages: number = 1;
@@ -39,6 +40,8 @@ export class ListDemandeComponent implements OnInit {
    * Charge les demandes avec les filtres appliqués
    */
   loadDemandes(): void {
+    this.isLoading = true;
+    
     const filters: DemandRVFilter = {
       statut: this.filterStatus as StatutDemande | '',
       specialite: this.filterSpecialite,
@@ -52,9 +55,11 @@ export class ListDemandeComponent implements OnInit {
         this.totalPages = response.totalPages;
         this.totalItems = response.totalItems;
         this.currentPage = response.currentPage;
+        this.isLoading = false;
       },
       error: (error) => {
         console.error('Erreur lors du chargement des demandes:', error);
+        this.isLoading = false;
       }
     });
   }
