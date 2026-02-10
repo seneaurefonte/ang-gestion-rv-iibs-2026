@@ -5,44 +5,107 @@
                 
                 <div class="card border-0 shadow-sm">
                     <div class="card-body p-4">
-                        <form id="patientForm">
+                        <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="numero" class="form-label"><i class="bi bi-hash"></i> Numéro Patient</label>
-                                    <input type="text" class="form-control" id="numero" placeholder="PAT-001" required>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="numero" 
+                                        formControlName="numero"
+                                        placeholder="PAT-001"
+                                        [class.is-invalid]="submitted && f['numero'].errors">
+                                    <div class="invalid-feedback" *ngIf="submitted && f['numero'].errors">
+                                        <span *ngIf="f['numero'].errors['required']">Le numéro patient est requis</span>
+                                        <span *ngIf="f['numero'].errors['minlength']">Le numéro doit contenir au moins 3 caractères</span>
+                                    </div>
                                 </div>
                                 
                                 <div class="col-md-6 mb-3">
                                     <label for="nom" class="form-label"><i class="bi bi-person"></i> Nom</label>
-                                    <input type="text" class="form-control" id="nom" placeholder="Dupont" required>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="nom" 
+                                        formControlName="nom"
+                                        placeholder="Dupont"
+                                        [class.is-invalid]="submitted && f['nom'].errors">
+                                    <div class="invalid-feedback" *ngIf="submitted && f['nom'].errors">
+                                        <span *ngIf="f['nom'].errors['required']">Le nom est requis</span>
+                                        <span *ngIf="f['nom'].errors['minlength']">Le nom doit contenir au moins 2 caractères</span>
+                                        <span *ngIf="f['nom'].errors['maxlength']">Le nom ne peut pas dépasser 50 caractères</span>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="prenom" class="form-label"><i class="bi bi-person"></i> Prénom</label>
-                                    <input type="text" class="form-control" id="prenom" placeholder="Jean" required>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="prenom" 
+                                        formControlName="prenom"
+                                        placeholder="Jean"
+                                        [class.is-invalid]="submitted && f['prenom'].errors">
+                                    <div class="invalid-feedback" *ngIf="submitted && f['prenom'].errors">
+                                        <span *ngIf="f['prenom'].errors['required']">Le prénom est requis</span>
+                                        <span *ngIf="f['prenom'].errors['minlength']">Le prénom doit contenir au moins 2 caractères</span>
+                                        <span *ngIf="f['prenom'].errors['maxlength']">Le prénom ne peut pas dépasser 50 caractères</span>
+                                    </div>
                                 </div>
                                 
                                 <div class="col-md-6 mb-3">
-                                    <label for="tel" class="form-label"><i class="bi bi-telephone"></i> Téléphone</label>
-                                    <input type="tel" class="form-control" id="tel" placeholder="+221 77 123 45 67" required>
+                                    <label for="telephone" class="form-label"><i class="bi bi-telephone"></i> Téléphone</label>
+                                    <input 
+                                        type="tel" 
+                                        class="form-control" 
+                                        id="telephone" 
+                                        formControlName="telephone"
+                                        placeholder="+221 77 123 45 67"
+                                        [class.is-invalid]="submitted && f['telephone'].errors">
+                                    <div class="invalid-feedback" *ngIf="submitted && f['telephone'].errors">
+                                        <span *ngIf="f['telephone'].errors['required']">Le téléphone est requis</span>
+                                        <span *ngIf="f['telephone'].errors['pattern']">Le format du téléphone est invalide (minimum 9 chiffres)</span>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="adresse" class="form-label"><i class="bi bi-geo-alt"></i> Adresse</label>
-                                <textarea class="form-control" id="adresse" rows="2" placeholder="Rue, Code postal, Ville" required></textarea>
+                                <textarea 
+                                    class="form-control" 
+                                    id="adresse" 
+                                    rows="2" 
+                                    formControlName="adresse"
+                                    placeholder="Rue, Code postal, Ville"
+                                    [class.is-invalid]="submitted && f['adresse'].errors"></textarea>
+                                <div class="invalid-feedback" *ngIf="submitted && f['adresse'].errors">
+                                    <span *ngIf="f['adresse'].errors['required']">L'adresse est requise</span>
+                                    <span *ngIf="f['adresse'].errors['minlength']">L'adresse doit contenir au moins 5 caractères</span>
+                                </div>
                             </div>
 
                             <div class="mb-3">
                                 <label for="antecedents" class="form-label"><i class="bi bi-file-text"></i> Antécédents Médicaux</label>
-                                <textarea class="form-control" id="antecedents" rows="4" placeholder="Décrivez vos antécédents médicaux, allergies, maladies chroniques..."></textarea>
+                                <textarea 
+                                    class="form-control" 
+                                    id="antecedents" 
+                                    rows="4" 
+                                    formControlName="antecedents"
+                                    placeholder="Décrivez vos antécédents médicaux, allergies, maladies chroniques..."
+                                    [class.is-invalid]="submitted && f['antecedents'].errors"></textarea>
+                                <div class="invalid-feedback" *ngIf="submitted && f['antecedents'].errors">
+                                    <span *ngIf="f['antecedents'].errors['maxlength']">Ne peut pas dépasser 500 caractères</span>
+                                </div>
+                                <small class="form-text text-muted">Maximum 500 caractères</small>
                             </div>
 
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <a href="dashboard.html" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Annuler</a>
-                                <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Créer Patient</button>
+                                <button type="button" (click)="onCancel()" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Annuler</button>
+                                <button type="button" (click)="onReset()" class="btn btn-warning"><i class="bi bi-arrow-counterclockwise"></i> Réinitialiser</button>
+                                <button type="submit" class="btn btn-primary" [disabled]="patientForm.invalid && submitted"><i class="bi bi-check-circle"></i> Créer Patient</button>
                             </div>
                         </form>
                     </div>
@@ -65,6 +128,13 @@
                             <li><i class="bi bi-check-circle text-success"></i> Téléphone</li>
                             <li><i class="bi bi-check-circle text-success"></i> Adresse</li>
                         </ul>
+                        <hr>
+                        <div *ngIf="submitted" class="alert alert-info" role="alert">
+                            <small>
+                                <strong>Statut du formulaire:</strong> 
+                                {{ patientForm.valid ? 'Valide ✓' : 'Veuillez corriger les erreurs' }}
+                            </small>
+                        </div>
                     </div>
                 </div>
             </div>
