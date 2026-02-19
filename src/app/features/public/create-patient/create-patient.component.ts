@@ -25,7 +25,7 @@ export class CreatePatientComponent {
       numero: ['', [Validators.required, Validators.minLength(3)]],
       nom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       prenom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      telephone: ['', [Validators.required, Validators.pattern(/^\+?[0-9\s\-()]{9,}$/)]],
+      telephone: ['', [Validators.required, Validators.pattern(/^(77|78|75|76)\d{7}$/)]],
       adresse: ['', [Validators.required, Validators.minLength(5)]],
       antecedents: ['', [Validators.maxLength(500)]]
     });

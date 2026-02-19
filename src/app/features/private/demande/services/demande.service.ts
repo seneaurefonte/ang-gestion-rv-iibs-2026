@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import { DemandRV, DemandRVResponse, DemandRVFilter } from '../models/demande.model';
 import { IDemandeService } from './demande.interface';
 import { MOCK_DEMANDES } from '@mock/demande.mock';
@@ -16,13 +17,9 @@ export class DemandeService implements IDemandeService {
    * Récupère la liste des demandes de RV avec filtrage et pagination
    */
   getDemandes(filters: DemandRVFilter = {}): Observable<DemandRVResponse> {
-    // Utiliser les mocks pour le développement
-    return of(this.getMockDemandes(filters));
-
-    // Décommenter pour utiliser l'API réelle:
-    // return this.http.get<DemandRVResponse>(this.apiUrl, {
-    //   params: this.buildQueryParams(filters)
-    // });
+    return of(this.getMockDemandes(filters)).pipe(
+      delay(5000) // Délai de 5 secondes
+    );
   }
 
   /**

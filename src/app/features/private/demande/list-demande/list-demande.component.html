@@ -97,12 +97,10 @@
                         </tbody>
                     </table>
                 } @else {
-                    <div class="p-4 text-center">
-                        <i class="bi bi-inbox" style="font-size: 3rem; color: #ccc;"></i>
-                        <p class="mt-3 text-muted">Aucune demande de RV trouvée</p>
-                        <a routerLink="../demande-rv" class="btn btn-primary mt-2">
-                            <i class="bi bi-plus-circle"></i> Créer une demande
-                        </a>
+                    <div class="p-4">
+                        @if (showAlert) {
+                            <app-alert type="info" title="Aucune demande" message="Aucune demande de RV trouvée." (close)="closeAlert()"></app-alert>
+                        }
                     </div>
                 }
             </div>

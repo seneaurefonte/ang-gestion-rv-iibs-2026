@@ -2,14 +2,14 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { PaginationComponent, StatusBadgeComponent, LoadingComponent } from '@shared';
+import { PaginationComponent, StatusBadgeComponent, LoadingComponent, AlertComponent } from '@shared';
 import { IDemandeService, DEMANDE_SERVICE_TOKEN } from '../services';
 import { DemandRV, DemandRVFilter, StatutDemande } from '../models/demande.model';
 
 @Component({
   selector: 'app-list-demande',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, PaginationComponent, StatusBadgeComponent, LoadingComponent],
+  imports: [CommonModule, FormsModule, RouterModule, PaginationComponent, StatusBadgeComponent, LoadingComponent, AlertComponent],
   templateUrl: './list-demande.component.html',
   styleUrl: './list-demande.component.css'
 })
@@ -17,6 +17,7 @@ export class ListDemandeComponent implements OnInit {
   demandes: DemandRV[] = [];
   filteredDemandes: DemandRV[] = [];
   isLoading: boolean = false;
+  showAlert: boolean = true;
   
   currentPage: number = 1;
   totalPages: number = 1;
@@ -110,5 +111,12 @@ export class ListDemandeComponent implements OnInit {
   formatDate(dateString: string): string {
     const date = new Date(dateString);
     return date.toLocaleDateString('fr-FR');
+  }
+
+  /**
+   * Ferme l'alerte
+   */
+  closeAlert(): void {
+    this.showAlert = false;
   }
 }

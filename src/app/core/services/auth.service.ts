@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { LoginRequest, LoginResponse, UserLogin } from '../models';
 import { USERS_LOGIN_MOCK } from '../../mocks/users.mock';
 import { IAuthService, AUTH_SERVICE_TOKEN } from './auth.service.interface';
@@ -11,6 +12,14 @@ export class AuthService implements IAuthService {
   private readonly STORAGE_KEY = 'user_auth';
   private readonly TOKEN_KEY = 'auth_token';
   private readonly REFRESH_TOKEN_KEY = 'refresh_token';
+
+  // BehaviorSubject pour gérer l'état de l'utilisateur
+  private currentUserSubject = new BehaviorSubject<UserLogin | null>(this.getCurrentUser());
+  public currentUser$ = this.currentUserSubject.asObservable();
+
+  // BehaviorSubject pour gérer l'état d'authentification
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.isAuthenticatedSync());
+  public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
   login(credentials: LoginRequest): LoginResponse | null {
     // Rechercher l'utilisateur dans les mocks
@@ -31,6 +40,10 @@ export class AuthService implements IAuthService {
     // Stocker dans localStorage
     this.storeUserData(response);
 
+    // Mettre à jour les BehaviorSubjects
+    this.currentUserSubject.next(user);
+    this.isAuthenticatedSubject.next(true);
+
     return response;
   }
    private storeUserData(response: LoginResponse): void {
@@ -44,6 +57,10 @@ export class AuthService implements IAuthService {
     localStorage.removeItem(this.STORAGE_KEY);
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.REFRESH_TOKEN_KEY);
+
+    // Mettre à jour les BehaviorSubjects
+    this.currentUserSubject.next(null);
+    this.isAuthenticatedSubject.next(false);
   }
 
   getCurrentUser(): UserLogin | null {
@@ -60,6 +77,11 @@ export class AuthService implements IAuthService {
   }
 
   isAuthenticated(): boolean {
+    const token = localStorage.getItem(this.TOKEN_KEY);
+    return !!token && !!this.getCurrentUser();
+  }
+
+  private isAuthenticatedSync(): boolean {
     const token = localStorage.getItem(this.TOKEN_KEY);
     return !!token && !!this.getCurrentUser();
   }
@@ -88,6 +110,11 @@ export class AuthService implements IAuthService {
       };
 
       this.storeUserData(response);
+      
+      // Mettre à jour les BehaviorSubjects
+      this.currentUserSubject.next(user);
+      this.isAuthenticatedSubject.next(true);
+
       return response;
     }
 

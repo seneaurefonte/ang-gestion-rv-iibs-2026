@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
  ></app-alert>
 */
 @Component({
-  selector: '[app-alert]',
+  selector: 'app-alert',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './alert.component.html',

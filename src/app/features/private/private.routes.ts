@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { PrivateComponent } from './private.component';
 import { ListDemandeComponent } from './demande/list-demande/list-demande.component';
+import { demandesResolver } from './demande/resolvers/demandes.resolver';
 
 export const PRIVATE_ROUTES: Routes = [
   {
@@ -9,7 +10,10 @@ export const PRIVATE_ROUTES: Routes = [
     children: [
       {
         path: 'list-demande',
-        component: ListDemandeComponent
+        component: ListDemandeComponent,
+        resolve: {
+          demandes: demandesResolver
+        }
       },
       {
         path: '',
