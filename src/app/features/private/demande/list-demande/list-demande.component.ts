@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { PaginationComponent, StatusBadgeComponent, LoadingComponent, AlertComponent } from '@shared';
 import { IDemandeService, DEMANDE_SERVICE_TOKEN } from '../services';
 import { DemandRV, DemandRVFilter, StatutDemande } from '../models/demande.model';
@@ -31,10 +31,20 @@ export class ListDemandeComponent implements OnInit {
   // Const pour les statuts
   StatutDemande = StatutDemande;
 
-  constructor(@Inject(DEMANDE_SERVICE_TOKEN) private demandeService: IDemandeService) {}
+  constructor(
+    @Inject(DEMANDE_SERVICE_TOKEN) private demandeService: IDemandeService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.loadDemandes();
+    // Récupérer les données du resolver
+    const resolvedData = this.route.snapshot.data['demandes'];
+    if (resolvedData) {
+      this.demandes = resolvedData.data;
+      this.totalPages = resolvedData.totalPages;
+      this.totalItems = resolvedData.totalItems;
+      this.currentPage = resolvedData.currentPage;
+    }
   }
 
   /**
