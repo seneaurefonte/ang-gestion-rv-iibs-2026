@@ -1,15 +1,17 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { PaginationComponent, StatusBadgeComponent, LoadingComponent, AlertComponent } from '@shared';
 import { IDemandeService, DEMANDE_SERVICE_TOKEN } from '../services';
-import { DemandRV, DemandRVFilter, StatutDemande } from '../models/demande.model';
+import { DemandRV, DemandRVFilter, DemandRVResponse, StatutDemande } from '../models/demande.model';
 
 @Component({
   selector: 'app-list-demande',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, PaginationComponent, StatusBadgeComponent, LoadingComponent, AlertComponent],
+  imports: [CommonModule, FormsModule, RouterModule, PaginationComponent, StatusBadgeComponent, LoadingComponent, AlertComponent,AsyncPipe],
   templateUrl: './list-demande.component.html',
   styleUrl: './list-demande.component.css'
 })
@@ -18,6 +20,7 @@ export class ListDemandeComponent implements OnInit {
   filteredDemandes: DemandRV[] = [];
   isLoading: boolean = false;
   showAlert: boolean = true;
+  demandes$: Observable<DemandRVResponse> = of();
   
   currentPage: number = 1;
   totalPages: number = 1;
@@ -47,24 +50,20 @@ export class ListDemandeComponent implements OnInit {
   loadDemandes(): void {
     this.isLoading = true;
     
-    const filters: DemandRVFilter = {
-      statut: this.filterStatus as StatutDemande | '',
-      specialite: this.filterSpecialite,
-      page: this.currentPage,
-      limit: this.itemsPerPage
-    };
-
-    // Utiliser les données du resolver via this.route.data
-    this.route.data.subscribe(data => {
-      const resolvedData = data['demandes'];
-      if (resolvedData) {
-        this.demandes = resolvedData.data;
-        this.totalPages = resolvedData.totalPages;
-        this.totalItems = resolvedData.totalItems;
-        this.currentPage = resolvedData.currentPage;
-        this.isLoading = false;
-      }
-    });
+    // Utiliser le resolver via this.route.data et le pipe async
+    this.demandes$ = this.route.data.pipe(
+      map(data => {
+        const resolvedData = data['demandes'] as DemandRVResponse;
+        if (resolvedData) {
+          this.demandes = resolvedData.data;
+          this.totalPages = resolvedData.totalPages;
+          this.totalItems = resolvedData.totalItems;
+          this.currentPage = resolvedData.currentPage;
+          this.isLoading = false;
+        }
+        return resolvedData;
+      })
+    );
   }
 
   /**
