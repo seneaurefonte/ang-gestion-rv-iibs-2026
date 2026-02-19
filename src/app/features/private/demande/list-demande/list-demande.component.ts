@@ -37,14 +37,8 @@ export class ListDemandeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Récupérer les données du resolver
-    const resolvedData = this.route.snapshot.data['demandes'];
-    if (resolvedData) {
-      this.demandes = resolvedData.data;
-      this.totalPages = resolvedData.totalPages;
-      this.totalItems = resolvedData.totalItems;
-      this.currentPage = resolvedData.currentPage;
-    }
+    // Charger les demandes
+    this.loadDemandes();
   }
 
   /**
@@ -60,16 +54,14 @@ export class ListDemandeComponent implements OnInit {
       limit: this.itemsPerPage
     };
 
-    this.demandeService.getDemandes(filters).subscribe({
-      next: (response) => {
-        this.demandes = response.data;
-        this.totalPages = response.totalPages;
-        this.totalItems = response.totalItems;
-        this.currentPage = response.currentPage;
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Erreur lors du chargement des demandes:', error);
+    // Utiliser les données du resolver via this.route.data
+    this.route.data.subscribe(data => {
+      const resolvedData = data['demandes'];
+      if (resolvedData) {
+        this.demandes = resolvedData.data;
+        this.totalPages = resolvedData.totalPages;
+        this.totalItems = resolvedData.totalItems;
+        this.currentPage = resolvedData.currentPage;
         this.isLoading = false;
       }
     });
